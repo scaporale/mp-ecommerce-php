@@ -1,5 +1,5 @@
 <?php 
-    echo 'hola';/*
+    echo 'hola';
     require ('constantes.php'); 
     
     //Sanitización de variables GET (Prevención XSS)
@@ -106,4 +106,4 @@
     
 </body>
 
-</html>*/
+</html>
