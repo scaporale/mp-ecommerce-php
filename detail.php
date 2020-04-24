@@ -1,3 +1,5 @@
+<?php require ('generatePreference.php') ?>
+
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -44,8 +46,6 @@
 
 <body class="as-theme-light-heroimage">
     
-    <?php require ('generatePreference.php') ?>
-
     <div class="stack">
         
         <div class="as-search-wrapper" role="main">
@@ -134,11 +134,11 @@
                                         </h3>
                                     </div>
                                     
-                                    <form action="/procesar-pago" method="POST">
+                                    <form action="procesar-pago.php" method="POST">
                                         <script
                                         src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
                                         data-preference-id="<?php echo $preference->id; ?>"
-                                        data-header-color="#2D3277"
+                                        data-elements-color="#2D3277"
                                         data-button-label="Pagar la compra">
                                         </script>
                                     </form>

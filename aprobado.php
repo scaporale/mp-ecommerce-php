@@ -53,7 +53,9 @@
 
 
 <body class="as-theme-light-heroimage">
-
+    
+    <?php var_dump($_POST); die; ?>
+    
     <script>
         Swal.fire({
             icon: 'success',
