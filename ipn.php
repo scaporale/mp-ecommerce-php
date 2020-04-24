@@ -5,7 +5,8 @@
     require __DIR__  . '/vendor/autoload.php';
 
     $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-    var_dump($_GET); die;
+    var_dump($_GET);
+    var_dump($_POST); die;
     MercadoPago\SDK::setAccessToken(ACCESS_TOKEN);
 
     $merchant_order = null;
