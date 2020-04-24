@@ -5,6 +5,7 @@
     define("URL_SITE_PAGO_APROBADO", URL_SITE."aprobado");
     define("URL_SITE_PAGO_RECHAZADO", URL_SITE."rechazado");
     define("URL_SITE_PAGO_EN_PROCESO", URL_SITE."en-proceso");
+    define("URL_SITE_IPN", URL_SITE."ipn");
 
     //Credenciales de Mercado Pago
     define("ACCESS_TOKEN", "APP_USR-6317427424180639-090914-5c508e1b02a34fcce879a999574cf5c9-469485398");

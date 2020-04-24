@@ -76,8 +76,12 @@
     ];
     $preference->auto_return = "approved";
 
+    //Asigno URL del servicio IPN
+    $preference->notification_url = URL_SITE_IPN;
+
     //Asigno external_reference
     $preference->external_reference = INFORMACION_PEDIDO_NUMERO_DE_ORDEN;
+
 
 
     //Finalmente genero la preferencia
