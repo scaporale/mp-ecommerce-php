@@ -6,6 +6,7 @@
     define("URL_SITE_PAGO_RECHAZADO", URL_SITE."rechazado.php");
     define("URL_SITE_PAGO_EN_PROCESO", URL_SITE."en-proceso.php");
     define("URL_SITE_IPN", URL_SITE."ipn.php");
+    define("URL_MERCADO_PAGO_GET_PAYMENTS", "https://api.mercadopago.com/v1/payments/");
 
     //Credenciales de Mercado Pago
     define("ACCESS_TOKEN", "APP_USR-7455310476774640-042418-208e377607b9c1e908f72d0c17be8715-469485398");

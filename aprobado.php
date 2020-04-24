@@ -6,13 +6,32 @@
     $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
     
     MercadoPago\SDK::setAccessToken(ACCESS_TOKEN);
-    $payment = MercadoPago\Payment::find_by_id($_GET["collection_id"]);
-dump($payment); die;
+    
     $paymentMethodId = $_GET["payment_type"];
     $montoCobrado = 0;
     $numeroOrdenPedido = $_GET["external_reference"];
     $idPagoApproved = $_GET["collection_id"];
 
+    $cURLConnection = curl_init();
+
+    curl_setopt($cURLConnection, CURLOPT_URL, URL_MERCADO_PAGO_GET_PAYMENTS.$idPagoApproved.'?access_token='.ACCESS_TOKEN);
+    curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+
+    $payment = curl_exec($cURLConnection);
+
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if( $http_code != 200 ){
+        
+        die('El número de error retornado fue: '.$http_code);
+
+    }
+
+    curl_close($cURLConnection);
+
+    $paymentResponse - json_decode($payment);
+
+    var_dump($paymentResponse);die;
     $text = 'payment_method_id: '.$paymentMethodId.' <br> Monto: '.$montoCobrado.' <br> Numero de orden de pedido: '.$numeroOrdenPedido.' <br> ID de pago (approved): '.$idPagoApproved;
 ?>
 
