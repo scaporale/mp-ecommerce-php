@@ -1,5 +1,5 @@
 <?php 
-    echo 'hola';
+    
     require ('constantes.php'); 
     
     //Sanitización de variables GET (Prevención XSS)
@@ -18,7 +18,8 @@
 
     if( $http_code != 200 ){
         
-        die('El número de error retornado fue: '.$http_code);
+        echo 'El número de error retornado fue: '.$http_code;
+        die();
 
     }
 
