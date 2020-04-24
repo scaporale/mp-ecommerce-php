@@ -8,8 +8,8 @@
     define("URL_SITE_IPN", URL_SITE."ipn.php");
 
     //Credenciales de Mercado Pago
-    define("ACCESS_TOKEN", "APP_USR-6317427424180639-090914-5c508e1b02a34fcce879a999574cf5c9-469485398");
-    define("PUBLIC_KEY", "APP_USR-a83913d5-e583-4556-8c19-d2773746b430");
+    define("ACCESS_TOKEN", "APP_USR-7455310476774640-042418-208e377607b9c1e908f72d0c17be8715-469485398");
+    define("PUBLIC_KEY", "APP_USR-a4bbec5d-51dd-4fbb-b2b9-143486752915");
     
     //Constantes para configurar la preferencia
     define("CANTIDAD_MAXIMA_CUOTAS", 6);

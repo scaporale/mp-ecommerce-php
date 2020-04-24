@@ -26,9 +26,9 @@
     $item = new MercadoPago\Item();
     $item->id = INFORMACION_PRODUCTO_ID;
     $item->title = $titleProducto;
-    $item->quantity = INFORMACION_PRODUCTO_CANTIDAD;
+    $item->quantity = intval(INFORMACION_PRODUCTO_CANTIDAD);
     $item->currency_id = INFORMACION_PRODUCTO_MONEDA;
-    $item->unit_price = $priceProducto;
+    $item->unit_price = floatval($priceProducto);
     $item->description = INFORMACION_PRODUCTO_DESCRIPCION;
     $item->picture_url = URL_SITE.$imgProducto;
 
@@ -85,7 +85,7 @@
 
 
     //Finalmente genero la preferencia
-    $status = $preference->save();
+    $preference->save();
 
     // var_dump($preference);
     // die;

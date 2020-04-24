@@ -2,7 +2,7 @@
 
     require ('constantes.php'); 
 
-    //Sanitización de variables POST (Prevención XSS)
+    //Sanitización de variables GET (Prevención XSS)
     $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
     
     MercadoPago\SDK::setAccessToken(ACCESS_TOKEN);
