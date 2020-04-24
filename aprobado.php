@@ -2,7 +2,7 @@
 
     require ('constantes.php'); 
 
-    var_dump($_POST); die;
+    var_dump($_GET); die;
     
     $paymentMethodId = '';
     $montoCobrado = 0;
