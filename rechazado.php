@@ -1,3 +1,5 @@
+<?php require ('constantes.php'); ?>
+
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -59,8 +61,12 @@
             icon: 'error',
             title: 'Oops...',
             text: 'Algo anduvo mal!',
+            footer: 'Su pago fue rechazado',
+            timer: 10000,
             showConfirmButton: false,
-            footer: 'Su pago fue rechazado'
+            onClose: function(){
+                window.location.replace("<?php echo URL_SITE; ?>");
+            }
         })
     </script>
     

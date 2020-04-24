@@ -1,3 +1,17 @@
+<?php 
+
+    require ('constantes.php'); 
+
+    var_dump($_POST); die;
+    
+    $paymentMethodId = '';
+    $montoCobrado = 0;
+    $numeroOrdenPedido = '';
+    $idPagoApproved = '';
+
+    $text = 'payment_method_id: '.$paymentMethodId.' <br> Monto: '.$montoCobrado.' <br> Numero de orden de pedido: '.$numeroOrdenPedido.' <br> ID de pago (approved): '.$idPagoApproved;
+?>
+
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -53,16 +67,18 @@
 
 
 <body class="as-theme-light-heroimage">
-    
-    <?php var_dump($_POST); die; ?>
-    
+        
     <script>
         Swal.fire({
             icon: 'success',
             title: '¡El pago fue aceptado!',
+            text: "<?php echo $text; ?>",
+            footer: 'Muchas gracias por su compra',
+            timer: 20000,
             showConfirmButton: false,
-            timer: 10000,
-            footer: 'Muchas gracias por su compra'
+            onClose: function(){
+                window.location.replace("<?php echo URL_SITE; ?>");
+            }
         })
     </script>
     

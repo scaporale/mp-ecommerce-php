@@ -1,3 +1,5 @@
+<?php require ('constantes.php'); ?>
+
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -59,8 +61,13 @@
             icon: 'warning',
             title: 'Pago pendiente',
             text: '¡Su pago esta siendo procesado!',
+            timer: 10000,
             showConfirmButton: false,
+            onClose: function(){
+                window.location.replace("<?php echo URL_SITE; ?>");
+            }
         })
+        
     </script>
     
 </body>
