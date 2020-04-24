@@ -2,37 +2,43 @@
     
     require ('constantes.php'); 
     
+    require __DIR__  . '/vendor/autoload.php';
+
     //Sanitización de variables GET (Prevención XSS)
     $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
     
+    $idPagoApproved = $_GET["collection_id"];
+
     MercadoPago\SDK::setAccessToken(ACCESS_TOKEN);
     
     $cURLConnection = curl_init();
 
-    curl_setopt($cURLConnection, CURLOPT_URL, URL_MERCADO_PAGO_GET_PAYMENTS.$idPagoApproved.'?access_token='.ACCESS_TOKEN);
+    $urlGetPayment = URL_MERCADO_PAGO_GET_PAYMENTS.$idPagoApproved.'?access_token='.ACCESS_TOKEN;
+    
+    curl_setopt($cURLConnection, CURLOPT_URL, $urlGetPayment);
     curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
 
     $payment = curl_exec($cURLConnection);
-
+    
     $http_code = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
 
     if( $http_code != 200 ){
         
         echo 'El número de error retornado fue: '.$http_code;
-        die();
+        exit();
 
     }
 
     curl_close($cURLConnection);
 
-    $paymentResponse - json_decode($payment);
+    $paymentResponse = json_decode($payment);
+    
+    $paymentMethodId = $paymentResponse->payment_method_id;
+    $montoCobrado = $paymentResponse->transaction_details->total_paid_amount;
+    $numeroOrdenPedido = $paymentResponse->external_reference;
+    $idPagoApproved = $paymentResponse->id;
 
-    $paymentMethodId = $paymentResponse["payment_method_id"];
-    $montoCobrado = $paymentResponse["transaction_details"]["total_paid_amount"];
-    $numeroOrdenPedido = $paymentResponse["external_reference"];
-    $idPagoApproved = $paymentResponse["id"];
-
-    $text = 'payment_method_id: '.$paymentMethodId.' <br> Monto: '.$montoCobrado.' <br> Numero de orden de pedido: '.$numeroOrdenPedido.' <br> ID de pago (approved): '.$idPagoApproved;
+    $html = 'payment_method_id: '.$paymentMethodId.'. <br> Monto: '.INFORMACION_PRODUCTO_MONEDA.' $ '.$montoCobrado.' <br> Numero de orden de pedido: '.$numeroOrdenPedido.' <br> ID de pago (approved): '.$idPagoApproved;
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +101,7 @@
         Swal.fire({
             icon: 'success',
             title: '¡El pago fue aceptado!',
-            text: "<?php echo $text; ?>",
+            html: "<?php echo $html; ?>",
             footer: 'Muchas gracias por su compra',
             timer: 20000,
             showConfirmButton: false,
