@@ -5,14 +5,12 @@
     require __DIR__  . '/vendor/autoload.php';
 
     $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-    var_dump($_GET);
-    var_dump($_POST); die;
+
     MercadoPago\SDK::setAccessToken(ACCESS_TOKEN);
 
     $merchant_order = null;
-    $topic = $_GET["topic"];
 
-    switch($topic) {
+    switch($_GET["topic"]) {
         case "payment":
             $payment = MercadoPago\Payment::find_by_id($_GET["id"]);
             // Get the payment and the corresponding merchant_order reported by the IPN.
@@ -23,24 +21,44 @@
             break;
     }
 
-    $paid_amount = 0;
-    foreach ($merchant_order->payments as $payment) {
-        if ($payment['status'] == 'approved'){
-            $paid_amount += $payment['transaction_amount'];
-        }
-    }
+    if(!empty($merchant_order)){
 
-    // If the payment's transaction amount is equal (or bigger) than the merchant_order's amount you can release your items
-    if($paid_amount >= $merchant_order->total_amount){
-        if (count($merchant_order->shipments)>0) { // The merchant_order has shipments
-            if($merchant_order->shipments[0]->status == "ready_to_ship") {
-                print_r("Totally paid. Print the label and release your item.");
+        if(!empty($payment)){
+            $paid_amount = 0;
+            foreach ($merchant_order->payments as $payment) {
+                if ($payment->status == 'approved'){
+                    $paid_amount += $payment->transaction_amount;
+                }
             }
-        } else { // The merchant_order don't has any shipments
-            print_r("Totally paid. Release your item.");
+            /*
+            public 'id' => int 6290967916
+            public 'transaction_amount' => int 10000
+            public 'total_paid_amount' => int 10000
+            public 'shipping_cost' => int 0
+            public 'currency_id' => string 'ARS' (length=3)
+            public 'status' => string 'approved' (length=8)
+            public 'status_detail' => string 'accredited' (length=10)
+            public 'operation_type' => string 'regular_payment' (length=15)
+            public 'date_approved' => string '2020-04-24T16:19:11.000-04:00' (length=29)
+            public 'date_created' => string '2020-04-24T16:19:10.000-04:00' (length=29)
+            public 'last_modified' => string '2020-04-24T16:19:11.000-04:00' (length=29)
+            public 'amount_refunded' => int 0
+            */
+            $html = 'id: '.$payment->id. '<br>';
+            $html .= 'transaction_amount: '.$payment->transaction_amount. '<br>';
+            $html .= 'total_paid_amount: '.$payment->total_paid_amount. '<br>';
+            $html .= 'shipping_cost: '.$payment->shipping_cost. '<br>';
+            $html .= 'currency_id: '.$payment->currency_id. '<br>';
+            $html .= 'status: '.$payment->status. '<br>';
+            $html .= 'status_detail: '.$payment->status_detail. '<br>';
+            $html .= 'operation_type: '.$payment->operation_type. '<br>';
+            $html .= 'date_approved: '.$payment->date_approved. '<br>';
+            $html .= 'date_created: '.$payment->date_created. '<br>';
+            $html .= 'last_modified: '.$payment->last_modified. '<br>';
+            $html .= 'amount_refunded: '.$payment->amount_refunded. '<br>';
+
+            echo $html;
+
         }
-    } else {
-        print_r("Not paid yet. Do not release your item.");
+
     }
-    var_dump($paid_amount,$payment,$merchant_order); die;
-?>
