@@ -14,7 +14,7 @@
 
     $payment = curl_exec($cURLConnection);
 
-    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $http_code = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
 
     if( $http_code != 200 ){
         
