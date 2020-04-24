@@ -2,11 +2,16 @@
 
     require ('constantes.php');
 
+    require __DIR__  . '/vendor/autoload.php';
+
+    $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+    var_dump($_GET); die;
     MercadoPago\SDK::setAccessToken(ACCESS_TOKEN);
 
     $merchant_order = null;
+    $topic = $_GET["topic"];
 
-    switch($_GET["topic"]) {
+    switch($topic) {
         case "payment":
             $payment = MercadoPago\Payment::find_by_id($_GET["id"]);
             // Get the payment and the corresponding merchant_order reported by the IPN.
