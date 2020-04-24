@@ -2,12 +2,16 @@
 
     require ('constantes.php'); 
 
-    var_dump($_GET); die;
+    //Sanitización de variables POST (Prevención XSS)
+    $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
     
-    $paymentMethodId = '';
+    MercadoPago\SDK::setAccessToken(ACCESS_TOKEN);
+    $payment = MercadoPago\Payment::find_by_id($_GET["collection_id"]);
+dump($payment); die;
+    $paymentMethodId = $_GET["payment_type"];
     $montoCobrado = 0;
-    $numeroOrdenPedido = '';
-    $idPagoApproved = '';
+    $numeroOrdenPedido = $_GET["external_reference"];
+    $idPagoApproved = $_GET["collection_id"];
 
     $text = 'payment_method_id: '.$paymentMethodId.' <br> Monto: '.$montoCobrado.' <br> Numero de orden de pedido: '.$numeroOrdenPedido.' <br> ID de pago (approved): '.$idPagoApproved;
 ?>
