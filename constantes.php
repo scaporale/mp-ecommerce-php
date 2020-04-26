@@ -9,9 +9,9 @@
     define("URL_MERCADO_PAGO_GET_PAYMENTS", "https://api.mercadopago.com/v1/payments/");
 
     //Credenciales de Mercado Pago
-    define("ACCESS_TOKEN", "APP_USR-7455310476774640-042418-208e377607b9c1e908f72d0c17be8715-469485398");
-    define("PUBLIC_KEY", "APP_USR-a4bbec5d-51dd-4fbb-b2b9-143486752915");
-    
+    define("ACCESS_TOKEN", "APP_USR-7455310476774640-042420-873795a9accdd4def57ef87caea65e37-469485398");
+    define("PUBLIC_KEY", "APP_USR-f84cca71-b882-48c5-8815-2b76471f4ed9");
+                          
     //Constantes para configurar la preferencia
     define("CANTIDAD_MAXIMA_CUOTAS", 6);
     define("MEDIOS_DE_PAGO_EXCEPTUADOS", [ 'id' => 'amex' ]);
